@@ -2,7 +2,7 @@
 data:
   panel: data/fixture/panel_2p.csv     # the Lab 3B fixture: four fictional BDCs, two schedules each
   real_panel: data/real/panel_2p.parquet   # copy your Lab 3B real panel here (Parquet or CSV) and commit it
-  use_real: false                      # false: build from the fixture; true: from real_panel (record and demo on it)
+  use_real: true                       # false: build from the fixture; true: from real_panel (record and demo on it)
   db: data/panel.sqlite                # built by tools/build_db.py from the panel above (gitignored)
   view_sql: sql/holdings_v.sql         # you write this (Lab 32B)
 server:
