@@ -9,10 +9,8 @@ The kit gives you tested building blocks, not a solution. Your view, contract, s
 ten questions and demo are the lab. **Due Friday 20 November 2026, 3:59 p.m. ET.**
 
 ## Setup (10 minutes)
-Copy this folder into your team repository as `cs4b/` (next to `cs3b/`), and run every command from
-inside it.
+Run every command from this repository root.
 ```
-cd cs4b
 python -m venv .venv && source .venv/bin/activate      # Python 3.11 or later
 pip install -r requirements.txt
 python tests/run_tests.py                               # 26/26 kit tests
@@ -50,7 +48,7 @@ Replay, the tests and grading need no key. Never commit it.
 | `app/streamlit_app.py` | 4: the interface | 36B |
 | `questions/questions.yaml`, `outputs/questions/`, `outputs/cache/` | 5: ten questions, answered and replayable | 36B |
 | `outputs/economics.md`, `outputs/failures.md` | 6: unit economics and the failure log | 36B |
-| `README.md` (yours, at the top of `cs4b/`) | setup, architecture, an Inspector screenshot, the demo link | 36B |
+| `README.md` (yours, at the repository root) | setup, architecture, an Inspector screenshot, the demo link | 36B |
 
 Replace this README with your own when you submit; keep the setup commands.
 

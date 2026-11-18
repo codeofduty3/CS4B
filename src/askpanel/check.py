@@ -1,4 +1,4 @@
-"""Lab 4B self-check. Run from your cs4b/ folder:
+"""Lab 4B self-check. Run from the repository root:
 
     PYTHONPATH=src python -m askpanel.check
 
