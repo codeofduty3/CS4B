@@ -2,3 +2,9 @@
 /LANTERN_Lab4B_Brief.pdf
 /LANTERN_Tool_Tutorial_Part4B.pdf
 /README.md
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/*.sqlite
+.env
