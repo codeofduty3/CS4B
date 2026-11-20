@@ -9,6 +9,11 @@ Replay is the default model mode. It answers recorded questions from the
 committed cache with no API key, network access, or model charges. Record
 mode calls Gemini and requires `GEMINI_API_KEY`; keys are never committed.
 
+## Live services
+
+- Streamlit app: <https://cs4b-ask-panel.streamlit.app>
+- Codelab source: [`docs/codelab.md`](docs/codelab.md)
+
 ## Setup (10 minutes)
 Run every command from this repository root.
 ```
