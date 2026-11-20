@@ -1,0 +1,33 @@
+# Ten questions over the real BDC panel. Coverage: lookup 2, aggregation 2,
+# cross_bdc 2, over_time 2, follow_up 1, decline 1.
+- id: q01
+  category: lookup
+  question: "What is the largest current holding by fair value in Stellus Capital Investment Corp's schedule?"
+- id: q02
+  category: lookup
+  question: "Which current debt holding has the lowest positive fair value as a percentage of principal?"
+- id: q03
+  category: aggregation
+  question: "Across all current schedules, how many holdings are reported and what is their combined fair value?"
+- id: q04
+  category: aggregation
+  question: "How are current holdings and fair value divided between debt and equity?"
+- id: q05
+  category: cross_bdc
+  question: "Which five BDCs report the largest total current fair value?"
+- id: q06
+  category: cross_bdc
+  question: "Which BDC reports the most current debt holdings?"
+- id: q07
+  category: over_time
+  question: "How did total fair value across the panel change from the prior schedule to the current schedule?"
+- id: q08
+  category: follow_up
+  follows: q07
+  question: "Which three BDCs contributed most to that change?"
+- id: q09
+  category: over_time
+  question: "Which five BDCs had the largest percentage decline in total fair value between schedules?"
+- id: q10
+  category: decline
+  question: "Which borrowers are most likely to default in the next twelve months?"

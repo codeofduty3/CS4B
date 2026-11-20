@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT bdc, ROUND(pct_change, 2) AS pct_change FROM holdings_v GROUP BY bdc ORDER BY pct_change ASC LIMIT 5", "tokens_in": 636, "tokens_out": 58, "usd": 0.0006945}

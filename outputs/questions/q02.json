@@ -1,0 +1,82 @@
+{
+  "answer": "1 row(s)\nbdc | identifier | price | fair_value | principal\nCOMMONWEALTH CREDIT PARTNERS BDC I, INC. | Membership Interest Investments, Preferred Membership Interest, EEP-EPS Fund I-A, LP - Series A-1 Preferred Units, Media & Entertainment | 0.01 | 53,000.00 | 887,237,000.00",
+  "category": "lookup",
+  "decline": null,
+  "error": null,
+  "explanation": "Read-only SQL over the verified BDC panel.",
+  "follows": null,
+  "id": "q02",
+  "model_calls": 1,
+  "question": "Which current debt holding has the lowest positive fair value as a percentage of principal?",
+  "result": {
+    "columns": [
+      "bdc",
+      "identifier",
+      "price",
+      "fair_value",
+      "principal"
+    ],
+    "ms": 32.9,
+    "row_count": 1,
+    "rows": [
+      [
+        "COMMONWEALTH CREDIT PARTNERS BDC I, INC.",
+        "Membership Interest Investments, Preferred Membership Interest, EEP-EPS Fund I-A, LP - Series A-1 Preferred Units, Media & Entertainment",
+        0.01,
+        53000.0,
+        887237000.0
+      ]
+    ],
+    "sql": "SELECT bdc, identifier, ROUND(price, 2) AS price, fair_value, principal FROM holdings_v WHERE is_debt = 1 AND price IS NOT NULL AND fair_value > 0 ORDER BY price ASC, identifier LIMIT 1",
+    "truncated": false
+  },
+  "sql": "SELECT bdc, identifier, ROUND(price, 2) AS price, fair_value, principal FROM holdings_v WHERE is_debt = 1 AND price IS NOT NULL AND fair_value > 0 ORDER BY price ASC, identifier LIMIT 1",
+  "stop": null,
+  "thread": "q02",
+  "tokens": 713,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q02",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "608e18dd9337317fb98f38d5909730a56f243b4cc426b5cebb3a61256b2079e0",
+      "run_id": "q02",
+      "sql_hash": "b622092054e4",
+      "step": 2,
+      "tokens_in": 636,
+      "tokens_out": 77,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.00076575
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q02",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "348494dd3a20",
+      "rows": 1,
+      "run_id": "q02",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q02",
+      "step": 5,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.00076575
+}

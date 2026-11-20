@@ -1,0 +1,112 @@
+{
+  "answer": "2 row(s)\ninvestment_kind | holdings | total_fair_value | average_fair_value\nDebt | 19640 | 158,777,897,672.00 | 8,084,414.34\nEquity | 8049 | 12,190,125,423.00 | 1,861,087.85",
+  "category": "aggregation",
+  "decline": null,
+  "error": null,
+  "explanation": "Read-only SQL over the verified BDC panel.",
+  "follows": null,
+  "id": "q04",
+  "model_calls": 2,
+  "question": "How are current holdings and fair value divided between debt and equity?",
+  "result": {
+    "columns": [
+      "investment_kind",
+      "holdings",
+      "total_fair_value",
+      "average_fair_value"
+    ],
+    "ms": 27.5,
+    "row_count": 2,
+    "rows": [
+      [
+        "Debt",
+        19640,
+        158777897672.0,
+        8084414.34
+      ],
+      [
+        "Equity",
+        8049,
+        12190125423.0,
+        1861087.85
+      ]
+    ],
+    "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS investment_kind, COUNT(*) AS holdings, ROUND(SUM(fair_value), 2) AS total_fair_value, ROUND(AVG(fair_value), 2) AS average_fair_value FROM holdings_v GROUP BY is_debt ORDER BY is_debt DESC",
+    "truncated": false
+  },
+  "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS investment_kind, COUNT(*) AS holdings, ROUND(SUM(fair_value), 2) AS total_fair_value, ROUND(AVG(fair_value), 2) AS average_fair_value FROM holdings_v GROUP BY is_debt ORDER BY is_debt DESC",
+  "stop": null,
+  "thread": "q04",
+  "tokens": 1470,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q04",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "98d48a2a69610317bd9198ff149b591c4add414bfb2bc245331ebf77e2f6d4f2",
+      "run_id": "q04",
+      "sql_hash": "f7bb2d586891",
+      "step": 2,
+      "tokens_in": 631,
+      "tokens_out": 59,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.0006945
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q04",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "invalid",
+      "run_id": "q04",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 1,
+      "node": "generate",
+      "request_key": "2a4874fbc30695c5040bf95935b157e1f0bcdf96c747f7ba98542d49b6fe390d",
+      "run_id": "q04",
+      "sql_hash": "f20fadba98ff",
+      "step": 5,
+      "tokens_in": 686,
+      "tokens_out": 94,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.000867
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q04",
+      "step": 6,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "bebf9edac780",
+      "rows": 2,
+      "run_id": "q04",
+      "step": 7,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q04",
+      "step": 8,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.0015615
+}

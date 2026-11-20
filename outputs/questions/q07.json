@@ -1,0 +1,78 @@
+{
+  "answer": "1 row(s)\nprior_fair_value | current_fair_value | change_usd\n151,515,628,355.00 | 170,968,023,095.00 | 19,452,394,740.00",
+  "category": "over_time",
+  "decline": null,
+  "error": null,
+  "explanation": "Read-only SQL over the verified BDC panel.",
+  "follows": null,
+  "id": "q07",
+  "model_calls": 1,
+  "question": "How did total fair value across the panel change from the prior schedule to the current schedule?",
+  "result": {
+    "columns": [
+      "prior_fair_value",
+      "current_fair_value",
+      "change_usd"
+    ],
+    "ms": 22.3,
+    "row_count": 1,
+    "rows": [
+      [
+        151515628355.0,
+        170968023095.0,
+        19452394740.0
+      ]
+    ],
+    "sql": "SELECT ROUND(SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END), 2) AS prior_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END), 2) AS current_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE -fair_value END), 2) AS change_usd FROM holdings",
+    "truncated": false
+  },
+  "sql": "SELECT ROUND(SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END), 2) AS prior_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END), 2) AS current_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE -fair_value END), 2) AS change_usd FROM holdings",
+  "stop": null,
+  "thread": "q07",
+  "tokens": 748,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q07",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "e0e8f47393c196afc1070aaf049c045f5a8a77b72dfe617fe1672c5ffe47cfa4",
+      "run_id": "q07",
+      "sql_hash": "ef0b57c4efbb",
+      "step": 2,
+      "tokens_in": 638,
+      "tokens_out": 110,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.000891
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q07",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "ca4752bd5f63",
+      "rows": 1,
+      "run_id": "q07",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q07",
+      "step": 5,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.000891
+}

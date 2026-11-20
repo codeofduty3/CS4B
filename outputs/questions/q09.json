@@ -1,0 +1,130 @@
+{
+  "answer": "5 row(s)\nbdc | prior_fair_value | current_fair_value | pct_change\nHANCOCK PARK CORPORATE INCOME, INC. | 29,768,535.00 | 19,858,407.00 | -33.29\nONEX DIRECT LENDING BDC FUND | 395,375,030.00 | 287,774,870.00 | -27.21\nWTI FUND X, INC. | 398,113,300.00 | 324,437,972.00 | -18.51\nGOLDMAN SACHS PRIVATE MIDDLE MARKET CREDIT II LLC | 1,649,434,000.00 | 1,361,577,000.00 | -17.45\nBLACKROCK DIRECT LENDING CORP. | 210,055,893.00 | 191,027,674.00 | -9.06",
+  "category": "over_time",
+  "decline": null,
+  "error": null,
+  "explanation": "Read-only SQL over the verified BDC panel.",
+  "follows": null,
+  "id": "q09",
+  "model_calls": 2,
+  "question": "Which five BDCs had the largest percentage decline in total fair value between schedules?",
+  "result": {
+    "columns": [
+      "bdc",
+      "prior_fair_value",
+      "current_fair_value",
+      "pct_change"
+    ],
+    "ms": 68.8,
+    "row_count": 5,
+    "rows": [
+      [
+        "HANCOCK PARK CORPORATE INCOME, INC.",
+        29768535.0,
+        19858407.0,
+        -33.29
+      ],
+      [
+        "ONEX DIRECT LENDING BDC FUND",
+        395375030.0,
+        287774870.0,
+        -27.21
+      ],
+      [
+        "WTI FUND X, INC.",
+        398113300.0,
+        324437972.0,
+        -18.51
+      ],
+      [
+        "GOLDMAN SACHS PRIVATE MIDDLE MARKET CREDIT II LLC",
+        1649434000.0,
+        1361577000.0,
+        -17.45
+      ],
+      [
+        "BLACKROCK DIRECT LENDING CORP.",
+        210055893.0,
+        191027674.0,
+        -9.06
+      ]
+    ],
+    "sql": "WITH totals AS (SELECT f.name AS bdc, SUM(CASE WHEN h.period_role = 'prior' THEN h.fair_value END) AS prior_fair_value, SUM(CASE WHEN h.period_role = 'current' THEN h.fair_value END) AS current_fair_value FROM holdings h JOIN filings f ON f.adsh = h.adsh GROUP BY f.name) SELECT bdc, ROUND(prior_fair_value, 2) AS prior_fair_value, ROUND(current_fair_value, 2) AS current_fair_value, ROUND(100.0 * (current_fair_value - prior_fair_value) / prior_fair_value, 2) AS pct_change FROM totals WHERE prior_fair_value > 0 AND current_fair_value IS NOT NULL ORDER BY pct_change ASC, bdc LIMIT 5",
+    "truncated": false
+  },
+  "sql": "WITH totals AS (SELECT f.name AS bdc, SUM(CASE WHEN h.period_role = 'prior' THEN h.fair_value END) AS prior_fair_value, SUM(CASE WHEN h.period_role = 'current' THEN h.fair_value END) AS current_fair_value FROM holdings h JOIN filings f ON f.adsh = h.adsh GROUP BY f.name) SELECT bdc, ROUND(prior_fair_value, 2) AS prior_fair_value, ROUND(current_fair_value, 2) AS current_fair_value, ROUND(100.0 * (current_fair_value - prior_fair_value) / prior_fair_value, 2) AS pct_change FROM totals WHERE prior_fair_value > 0 AND current_fair_value IS NOT NULL ORDER BY pct_change ASC, bdc LIMIT 5",
+  "stop": null,
+  "thread": "q09",
+  "tokens": 1559,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q09",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "7ff808a50a425d394c9cb6d935b9f8645ea7a4564cd2f51230d954cbcbb68c69",
+      "run_id": "q09",
+      "sql_hash": "629ee5eb0689",
+      "step": 2,
+      "tokens_in": 636,
+      "tokens_out": 58,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.0006945
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q09",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "invalid",
+      "run_id": "q09",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 1,
+      "node": "generate",
+      "request_key": "fffbf61bfb79f1d5a48b5fd684e6c056e0974970bfe31336b18144ffab839057",
+      "run_id": "q09",
+      "sql_hash": "e4e473082a66",
+      "step": 5,
+      "tokens_in": 688,
+      "tokens_out": 177,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.00117975
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q09",
+      "step": 6,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "1b795df370ce",
+      "rows": 5,
+      "run_id": "q09",
+      "step": 7,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q09",
+      "step": 8,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.00187425
+}

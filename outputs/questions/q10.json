@@ -1,0 +1,52 @@
+{
+  "answer": "The panel does not contain borrower credit outlooks or default forecasts, so this cannot be answered.",
+  "category": "decline",
+  "decline": "The panel does not contain borrower credit outlooks or default forecasts, so this cannot be answered.",
+  "error": null,
+  "explanation": "The requested outcome is not represented in the panel.",
+  "follows": null,
+  "id": "q10",
+  "model_calls": 1,
+  "question": "Which borrowers are most likely to default in the next twelve months?",
+  "result": null,
+  "sql": null,
+  "stop": null,
+  "thread": "q10",
+  "tokens": 689,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q10",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "651a8247da8f066aa558cb26abff9b3aaf1066515912c9d74b9067b6adea5559",
+      "run_id": "q10",
+      "sql_hash": null,
+      "step": 2,
+      "tokens_in": 630,
+      "tokens_out": 59,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.00069375
+    },
+    {
+      "node": "check",
+      "outcome": "decline",
+      "run_id": "q10",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q10",
+      "step": 4,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.00069375
+}
