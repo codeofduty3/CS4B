@@ -3,7 +3,7 @@
   "category": "cross_bdc",
   "decline": null,
   "error": null,
-  "explanation": "Read-only SQL over the verified BDC panel.",
+  "explanation": "This query aggregates the total fair value of holdings for each BDC from the holdings_v view, orders them in descending order, and limits the result to the top five BDCs.",
   "follows": null,
   "id": "q05",
   "model_calls": 1,
@@ -13,7 +13,7 @@
       "bdc",
       "total_fair_value"
     ],
-    "ms": 29.7,
+    "ms": 55.7,
     "row_count": 5,
     "rows": [
       [
@@ -37,13 +37,13 @@
         8670997000.0
       ]
     ],
-    "sql": "SELECT bdc, ROUND(SUM(fair_value), 2) AS total_fair_value FROM holdings_v GROUP BY bdc ORDER BY total_fair_value DESC, bdc LIMIT 5",
+    "sql": "SELECT bdc, SUM(fair_value) AS total_fair_value FROM holdings_v GROUP BY bdc ORDER BY total_fair_value DESC LIMIT 5",
     "truncated": false
   },
-  "sql": "SELECT bdc, ROUND(SUM(fair_value), 2) AS total_fair_value FROM holdings_v GROUP BY bdc ORDER BY total_fair_value DESC, bdc LIMIT 5",
+  "sql": "SELECT bdc, SUM(fair_value) AS total_fair_value FROM holdings_v GROUP BY bdc ORDER BY total_fair_value DESC LIMIT 5",
   "stop": null,
   "thread": "q05",
-  "tokens": 692,
+  "tokens": 886,
   "trace": [
     {
       "node": "load_schema",
@@ -55,14 +55,14 @@
     {
       "attempt": 0,
       "node": "generate",
-      "request_key": "11bebb33a36d4b8f67f100024a92bc432f14b2acfc8309e32a5e88a54942ab0d",
+      "request_key": "5bd4088b11a5eb1b132a35cc835523b342b689e549eab52d39f5fe85969f9410",
       "run_id": "q05",
-      "sql_hash": "8eacacc2e82c",
+      "sql_hash": "8778ed928692",
       "step": 2,
-      "tokens_in": 628,
-      "tokens_out": 64,
+      "tokens_in": 789,
+      "tokens_out": 97,
       "ts": "2026-11-16T09:00:00-05:00",
-      "usd": 0.000711
+      "usd": 0.0004792
     },
     {
       "node": "check",
@@ -88,5 +88,5 @@
       "ts": "2026-11-16T09:00:00-05:00"
     }
   ],
-  "usd": 0.000711
+  "usd": 0.0004792
 }

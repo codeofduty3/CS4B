@@ -1,43 +1,40 @@
 {
-  "answer": "2 row(s)\ninvestment_kind | holdings | total_fair_value | average_fair_value\nDebt | 19640 | 158,777,897,672.00 | 8,084,414.34\nEquity | 8049 | 12,190,125,423.00 | 1,861,087.85",
+  "answer": "2 row(s)\nasset_type | holding_count | total_fair_value\nEquity | 8049 | 12,190,125,423.00\nDebt | 19640 | 158,777,897,672.00",
   "category": "aggregation",
   "decline": null,
   "error": null,
-  "explanation": "Read-only SQL over the verified BDC panel.",
+  "explanation": "Calculates the count and total fair value of current holdings divided between debt (is_debt = 1) and equity (is_debt = 0) using the holdings_v view.",
   "follows": null,
   "id": "q04",
-  "model_calls": 2,
+  "model_calls": 1,
   "question": "How are current holdings and fair value divided between debt and equity?",
   "result": {
     "columns": [
-      "investment_kind",
-      "holdings",
-      "total_fair_value",
-      "average_fair_value"
+      "asset_type",
+      "holding_count",
+      "total_fair_value"
     ],
-    "ms": 27.5,
+    "ms": 15.6,
     "row_count": 2,
     "rows": [
       [
-        "Debt",
-        19640,
-        158777897672.0,
-        8084414.34
-      ],
-      [
         "Equity",
         8049,
-        12190125423.0,
-        1861087.85
+        12190125423.0
+      ],
+      [
+        "Debt",
+        19640,
+        158777897672.0
       ]
     ],
-    "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS investment_kind, COUNT(*) AS holdings, ROUND(SUM(fair_value), 2) AS total_fair_value, ROUND(AVG(fair_value), 2) AS average_fair_value FROM holdings_v GROUP BY is_debt ORDER BY is_debt DESC",
+    "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS asset_type, COUNT(*) AS holding_count, SUM(fair_value) AS total_fair_value FROM holdings_v GROUP BY is_debt",
     "truncated": false
   },
-  "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS investment_kind, COUNT(*) AS holdings, ROUND(SUM(fair_value), 2) AS total_fair_value, ROUND(AVG(fair_value), 2) AS average_fair_value FROM holdings_v GROUP BY is_debt ORDER BY is_debt DESC",
+  "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS asset_type, COUNT(*) AS holding_count, SUM(fair_value) AS total_fair_value FROM holdings_v GROUP BY is_debt",
   "stop": null,
   "thread": "q04",
-  "tokens": 1470,
+  "tokens": 890,
   "trace": [
     {
       "node": "load_schema",
@@ -49,14 +46,14 @@
     {
       "attempt": 0,
       "node": "generate",
-      "request_key": "98d48a2a69610317bd9198ff149b591c4add414bfb2bc245331ebf77e2f6d4f2",
+      "request_key": "a4cb3749cc1d72f4222a073988791b2ad9e893812edf08e6baf61843d8baf3e9",
       "run_id": "q04",
-      "sql_hash": "f7bb2d586891",
+      "sql_hash": "1f8321e334a0",
       "step": 2,
-      "tokens_in": 631,
-      "tokens_out": 59,
+      "tokens_in": 790,
+      "tokens_out": 100,
       "ts": "2026-11-16T09:00:00-05:00",
-      "usd": 0.0006945
+      "usd": 0.000487
     },
     {
       "node": "check",
@@ -67,46 +64,20 @@
     },
     {
       "node": "execute",
-      "outcome": "invalid",
+      "outcome": "ok",
+      "result_hash": "023bb37dea95",
+      "rows": 2,
       "run_id": "q04",
       "step": 4,
       "ts": "2026-11-16T09:00:00-05:00"
     },
     {
-      "attempt": 1,
-      "node": "generate",
-      "request_key": "2a4874fbc30695c5040bf95935b157e1f0bcdf96c747f7ba98542d49b6fe390d",
-      "run_id": "q04",
-      "sql_hash": "f20fadba98ff",
-      "step": 5,
-      "tokens_in": 686,
-      "tokens_out": 94,
-      "ts": "2026-11-16T09:00:00-05:00",
-      "usd": 0.000867
-    },
-    {
-      "node": "check",
-      "outcome": "ok",
-      "run_id": "q04",
-      "step": 6,
-      "ts": "2026-11-16T09:00:00-05:00"
-    },
-    {
-      "node": "execute",
-      "outcome": "ok",
-      "result_hash": "bebf9edac780",
-      "rows": 2,
-      "run_id": "q04",
-      "step": 7,
-      "ts": "2026-11-16T09:00:00-05:00"
-    },
-    {
       "node": "summarize",
       "run_id": "q04",
-      "step": 8,
+      "step": 5,
       "stop": null,
       "ts": "2026-11-16T09:00:00-05:00"
     }
   ],
-  "usd": 0.0015615
+  "usd": 0.000487
 }

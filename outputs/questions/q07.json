@@ -1,9 +1,9 @@
 {
-  "answer": "1 row(s)\nprior_fair_value | current_fair_value | change_usd\n151,515,628,355.00 | 170,968,023,095.00 | 19,452,394,740.00",
+  "answer": "1 row(s)\nprior_fair_value | current_fair_value | change_in_fair_value\n151,515,628,355.00 | 170,968,023,095.00 | 19,452,394,740.00",
   "category": "over_time",
   "decline": null,
   "error": null,
-  "explanation": "Read-only SQL over the verified BDC panel.",
+  "explanation": "Calculates the total fair value for both prior and current schedules across all holdings in the holdings table and computes the difference.",
   "follows": null,
   "id": "q07",
   "model_calls": 1,
@@ -12,9 +12,9 @@
     "columns": [
       "prior_fair_value",
       "current_fair_value",
-      "change_usd"
+      "change_in_fair_value"
     ],
-    "ms": 22.3,
+    "ms": 17.6,
     "row_count": 1,
     "rows": [
       [
@@ -23,13 +23,13 @@
         19452394740.0
       ]
     ],
-    "sql": "SELECT ROUND(SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END), 2) AS prior_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END), 2) AS current_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE -fair_value END), 2) AS change_usd FROM holdings",
+    "sql": "SELECT SUM(CASE WHEN period_role = 'prior' THEN fair_value END) AS prior_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value END) AS current_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END) - SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END) AS change_in_fair_value FROM holdings",
     "truncated": false
   },
-  "sql": "SELECT ROUND(SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END), 2) AS prior_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END), 2) AS current_fair_value, ROUND(SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE -fair_value END), 2) AS change_usd FROM holdings",
+  "sql": "SELECT SUM(CASE WHEN period_role = 'prior' THEN fair_value END) AS prior_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value END) AS current_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END) - SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END) AS change_in_fair_value FROM holdings",
   "stop": null,
   "thread": "q07",
-  "tokens": 748,
+  "tokens": 935,
   "trace": [
     {
       "node": "load_schema",
@@ -41,14 +41,14 @@
     {
       "attempt": 0,
       "node": "generate",
-      "request_key": "e0e8f47393c196afc1070aaf049c045f5a8a77b72dfe617fe1672c5ffe47cfa4",
+      "request_key": "c96e92f99cb5b5844717eceb37a9f0fad6a3800107fd907a6f2b675edcf325b3",
       "run_id": "q07",
-      "sql_hash": "ef0b57c4efbb",
+      "sql_hash": "6882ba672947",
       "step": 2,
-      "tokens_in": 638,
-      "tokens_out": 110,
+      "tokens_in": 795,
+      "tokens_out": 140,
       "ts": "2026-11-16T09:00:00-05:00",
-      "usd": 0.000891
+      "usd": 0.0005885
     },
     {
       "node": "check",
@@ -74,5 +74,5 @@
       "ts": "2026-11-16T09:00:00-05:00"
     }
   ],
-  "usd": 0.000891
+  "usd": 0.0005885
 }

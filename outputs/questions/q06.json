@@ -1,9 +1,9 @@
 {
-  "answer": "1 row(s)\nbdc | debt_holdings\nGOLUB CAPITAL PRIVATE CREDIT FUND | 1428",
+  "answer": "1 row(s)\nbdc | debt_count\nGOLUB CAPITAL PRIVATE CREDIT FUND | 1428",
   "category": "cross_bdc",
   "decline": null,
   "error": null,
-  "explanation": "Read-only SQL over the verified BDC panel.",
+  "explanation": "This query counts the number of current debt holdings (is_debt = 1) for each BDC using the holdings_v view, groups by BDC, orders by the count in descending order, and returns the top BDC.",
   "follows": null,
   "id": "q06",
   "model_calls": 1,
@@ -11,9 +11,9 @@
   "result": {
     "columns": [
       "bdc",
-      "debt_holdings"
+      "debt_count"
     ],
-    "ms": 24.8,
+    "ms": 18.5,
     "row_count": 1,
     "rows": [
       [
@@ -21,13 +21,13 @@
         1428
       ]
     ],
-    "sql": "SELECT bdc, COUNT(*) AS debt_holdings FROM holdings_v WHERE is_debt = 1 GROUP BY bdc ORDER BY debt_holdings DESC, bdc LIMIT 1",
+    "sql": "SELECT bdc, COUNT(*) AS debt_count FROM holdings_v WHERE is_debt = 1 GROUP BY bdc ORDER BY debt_count DESC LIMIT 1",
     "truncated": false
   },
-  "sql": "SELECT bdc, COUNT(*) AS debt_holdings FROM holdings_v WHERE is_debt = 1 GROUP BY bdc ORDER BY debt_holdings DESC, bdc LIMIT 1",
+  "sql": "SELECT bdc, COUNT(*) AS debt_count FROM holdings_v WHERE is_debt = 1 GROUP BY bdc ORDER BY debt_count DESC LIMIT 1",
   "stop": null,
   "thread": "q06",
-  "tokens": 688,
+  "tokens": 893,
   "trace": [
     {
       "node": "load_schema",
@@ -39,14 +39,14 @@
     {
       "attempt": 0,
       "node": "generate",
-      "request_key": "976360fc4586eb3f3503006143549dd289c0304354b84cf0065c8f83539ab88b",
+      "request_key": "d734229db704180edd49445a6c0b4a70bbe3c11a70553fded3ef785b4a5546cd",
       "run_id": "q06",
-      "sql_hash": "aee3d144660b",
+      "sql_hash": "117498fa6b87",
       "step": 2,
-      "tokens_in": 626,
-      "tokens_out": 62,
+      "tokens_in": 787,
+      "tokens_out": 106,
       "ts": "2026-11-16T09:00:00-05:00",
-      "usd": 0.000702
+      "usd": 0.0005011
     },
     {
       "node": "check",
@@ -72,5 +72,5 @@
       "ts": "2026-11-16T09:00:00-05:00"
     }
   ],
-  "usd": 0.000702
+  "usd": 0.0005011
 }

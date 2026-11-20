@@ -1,39 +1,41 @@
 {
-  "answer": "1 row(s)\nbdc | identifier | price | fair_value | principal\nCOMMONWEALTH CREDIT PARTNERS BDC I, INC. | Membership Interest Investments, Preferred Membership Interest, EEP-EPS Fund I-A, LP - Series A-1 Preferred Units, Media & Entertainment | 0.01 | 53,000.00 | 887,237,000.00",
+  "answer": "1 row(s)\nadsh | bdc | identifier | fair_value | principal | fair_value_pct_of_principal\n0001193125-26-344908 | COMMONWEALTH CREDIT PARTNERS BDC I, INC. | Membership Interest Investments, Preferred Membership Interest, EEP-EPS Fund I-A, LP - Series A-1 Preferred Units, Media & Entertainment | 53,000.00 | 887,237,000.00 | 0.005974",
   "category": "lookup",
   "decline": null,
   "error": null,
-  "explanation": "Read-only SQL over the verified BDC panel.",
+  "explanation": "To find the current debt holding with the lowest positive fair value as a percentage of principal, we query holdings_v where is_debt = 1, fair_value > 0, and principal > 0, calculating the percentage as 100 * fair_value / principal, ordering ascending, and taking the top result.",
   "follows": null,
   "id": "q02",
   "model_calls": 1,
   "question": "Which current debt holding has the lowest positive fair value as a percentage of principal?",
   "result": {
     "columns": [
+      "adsh",
       "bdc",
       "identifier",
-      "price",
       "fair_value",
-      "principal"
+      "principal",
+      "fair_value_pct_of_principal"
     ],
-    "ms": 32.9,
+    "ms": 14.4,
     "row_count": 1,
     "rows": [
       [
+        "0001193125-26-344908",
         "COMMONWEALTH CREDIT PARTNERS BDC I, INC.",
         "Membership Interest Investments, Preferred Membership Interest, EEP-EPS Fund I-A, LP - Series A-1 Preferred Units, Media & Entertainment",
-        0.01,
         53000.0,
-        887237000.0
+        887237000.0,
+        0.005973601191113536
       ]
     ],
-    "sql": "SELECT bdc, identifier, ROUND(price, 2) AS price, fair_value, principal FROM holdings_v WHERE is_debt = 1 AND price IS NOT NULL AND fair_value > 0 ORDER BY price ASC, identifier LIMIT 1",
+    "sql": "SELECT adsh, bdc, identifier, fair_value, principal, (100.0 * fair_value / principal) AS fair_value_pct_of_principal FROM holdings_v WHERE is_debt = 1 AND fair_value > 0 AND principal > 0 ORDER BY fair_value_pct_of_principal ASC LIMIT 1",
     "truncated": false
   },
-  "sql": "SELECT bdc, identifier, ROUND(price, 2) AS price, fair_value, principal FROM holdings_v WHERE is_debt = 1 AND price IS NOT NULL AND fair_value > 0 ORDER BY price ASC, identifier LIMIT 1",
+  "sql": "SELECT adsh, bdc, identifier, fair_value, principal, (100.0 * fair_value / principal) AS fair_value_pct_of_principal FROM holdings_v WHERE is_debt = 1 AND fair_value > 0 AND principal > 0 ORDER BY fair_value_pct_of_principal ASC LIMIT 1",
   "stop": null,
   "thread": "q02",
-  "tokens": 713,
+  "tokens": 953,
   "trace": [
     {
       "node": "load_schema",
@@ -45,14 +47,14 @@
     {
       "attempt": 0,
       "node": "generate",
-      "request_key": "608e18dd9337317fb98f38d5909730a56f243b4cc426b5cebb3a61256b2079e0",
+      "request_key": "54aeaca10669e4a49a0f28f7b01fb05f89bbec600221988a24baf3fe583c64a3",
       "run_id": "q02",
-      "sql_hash": "b622092054e4",
+      "sql_hash": "a0d469e8cbe9",
       "step": 2,
-      "tokens_in": 636,
-      "tokens_out": 77,
+      "tokens_in": 793,
+      "tokens_out": 160,
       "ts": "2026-11-16T09:00:00-05:00",
-      "usd": 0.00076575
+      "usd": 0.0006379
     },
     {
       "node": "check",
@@ -64,7 +66,7 @@
     {
       "node": "execute",
       "outcome": "ok",
-      "result_hash": "348494dd3a20",
+      "result_hash": "160b372af1f4",
       "rows": 1,
       "run_id": "q02",
       "step": 4,
@@ -78,5 +80,5 @@
       "ts": "2026-11-16T09:00:00-05:00"
     }
   ],
-  "usd": 0.00076575
+  "usd": 0.0006379
 }

@@ -2,7 +2,7 @@
 # cross_bdc 2, over_time 2, follow_up 1, decline 1.
 - id: q01
   category: lookup
-  question: "What is the largest current holding by fair value in Stellus Capital Investment Corp's schedule?"
+  question: "What is the largest current holding by fair value in STELLUS CAPITAL INVESTMENT CORP's schedule?"
 - id: q02
   category: lookup
   question: "Which current debt holding has the lowest positive fair value as a percentage of principal?"
