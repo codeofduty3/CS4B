@@ -1,0 +1,83 @@
+{
+  "answer": "2 row(s)\nasset_type | holding_count | total_fair_value\nEquity | 8049 | 12,190,125,423.00\nDebt | 19640 | 158,777,897,672.00",
+  "category": "aggregation",
+  "decline": null,
+  "error": null,
+  "explanation": "Calculates the count and total fair value of current holdings divided between debt (is_debt = 1) and equity (is_debt = 0) using the holdings_v view.",
+  "follows": null,
+  "id": "q04",
+  "model_calls": 1,
+  "question": "How are current holdings and fair value divided between debt and equity?",
+  "result": {
+    "columns": [
+      "asset_type",
+      "holding_count",
+      "total_fair_value"
+    ],
+    "ms": 15.6,
+    "row_count": 2,
+    "rows": [
+      [
+        "Equity",
+        8049,
+        12190125423.0
+      ],
+      [
+        "Debt",
+        19640,
+        158777897672.0
+      ]
+    ],
+    "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS asset_type, COUNT(*) AS holding_count, SUM(fair_value) AS total_fair_value FROM holdings_v GROUP BY is_debt",
+    "truncated": false
+  },
+  "sql": "SELECT CASE WHEN is_debt = 1 THEN 'Debt' ELSE 'Equity' END AS asset_type, COUNT(*) AS holding_count, SUM(fair_value) AS total_fair_value FROM holdings_v GROUP BY is_debt",
+  "stop": null,
+  "thread": "q04",
+  "tokens": 890,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q04",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "a4cb3749cc1d72f4222a073988791b2ad9e893812edf08e6baf61843d8baf3e9",
+      "run_id": "q04",
+      "sql_hash": "1f8321e334a0",
+      "step": 2,
+      "tokens_in": 790,
+      "tokens_out": 100,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.000487
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q04",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "023bb37dea95",
+      "rows": 2,
+      "run_id": "q04",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q04",
+      "step": 5,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.000487
+}

@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT bdc, COUNT(*) AS debt_holdings FROM holdings_v WHERE is_debt = 1 GROUP BY bdc ORDER BY debt_holdings DESC, bdc LIMIT 1", "tokens_in": 626, "tokens_out": 62, "usd": 0.000702}

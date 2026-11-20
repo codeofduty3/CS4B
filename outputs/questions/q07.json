@@ -1,0 +1,78 @@
+{
+  "answer": "1 row(s)\nprior_fair_value | current_fair_value | change_in_fair_value\n151,515,628,355.00 | 170,968,023,095.00 | 19,452,394,740.00",
+  "category": "over_time",
+  "decline": null,
+  "error": null,
+  "explanation": "Calculates the total fair value for both prior and current schedules across all holdings in the holdings table and computes the difference.",
+  "follows": null,
+  "id": "q07",
+  "model_calls": 1,
+  "question": "How did total fair value across the panel change from the prior schedule to the current schedule?",
+  "result": {
+    "columns": [
+      "prior_fair_value",
+      "current_fair_value",
+      "change_in_fair_value"
+    ],
+    "ms": 17.6,
+    "row_count": 1,
+    "rows": [
+      [
+        151515628355.0,
+        170968023095.0,
+        19452394740.0
+      ]
+    ],
+    "sql": "SELECT SUM(CASE WHEN period_role = 'prior' THEN fair_value END) AS prior_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value END) AS current_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END) - SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END) AS change_in_fair_value FROM holdings",
+    "truncated": false
+  },
+  "sql": "SELECT SUM(CASE WHEN period_role = 'prior' THEN fair_value END) AS prior_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value END) AS current_fair_value, SUM(CASE WHEN period_role = 'current' THEN fair_value ELSE 0 END) - SUM(CASE WHEN period_role = 'prior' THEN fair_value ELSE 0 END) AS change_in_fair_value FROM holdings",
+  "stop": null,
+  "thread": "q07",
+  "tokens": 935,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q07",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "c96e92f99cb5b5844717eceb37a9f0fad6a3800107fd907a6f2b675edcf325b3",
+      "run_id": "q07",
+      "sql_hash": "6882ba672947",
+      "step": 2,
+      "tokens_in": 795,
+      "tokens_out": 140,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.0005885
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q07",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "ca4752bd5f63",
+      "rows": 1,
+      "run_id": "q07",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q07",
+      "step": 5,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.0005885
+}

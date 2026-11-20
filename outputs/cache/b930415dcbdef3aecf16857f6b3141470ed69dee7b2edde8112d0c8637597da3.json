@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT f.name AS bdc, ROUND(SUM(CASE WHEN h.period_role = 'current' THEN h.fair_value ELSE -h.fair_value END), 2) AS change_usd FROM holdings_v h JOIN filings f ON f.adsh = h.adsh GROUP BY f.name ORDER BY change_usd DESC, bdc LIMIT 3", "tokens_in": 735, "tokens_out": 89, "usd": 0.000885}

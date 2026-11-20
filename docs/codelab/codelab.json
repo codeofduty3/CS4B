@@ -1,0 +1,9 @@
+{
+  "title": "Ask the Panel",
+  "summary": "Build a guarded, replayable BDC analytics agent with MCP, LangGraph, SQLite, and Streamlit.",
+  "id": "ask-the-panel",
+  "status": "Published",
+  "authors": ["Dany Sigha"],
+  "categories": ["python", "langgraph", "mcp", "streamlit", "sqlite"],
+  "repository": "https://github.com/codeofduty3/CS4B"
+}

@@ -17,7 +17,17 @@ from . import gate, llm
 
 SYSTEM = ("You translate an analyst's question about BDC holdings into ONE "
           "SQLite SELECT over the tables described. Use only those tables and "
-          "columns. If the data cannot answer the question, decline. Reply as "
+          "columns. The schema lists every table and column, including "
+          "holdings_v, so use it when it directly provides the needed field. "
+          "holdings contains both schedules in period_role, while holdings_v "
+          "contains current-schedule rows with derived fields. To compare "
+          "schedules, aggregate holdings joined to filings with CASE on "
+          "period_role instead of joining historical rows through holdings_v. "
+          "Joins, GROUP BY, CASE, subqueries and common table expressions are "
+          "allowed. Earlier turn SQL is context; write a new query when a "
+          "follow-up needs different fields. Decline only when the required "
+          "data is genuinely absent, not merely because the question requires "
+          "aggregation or comparing prior and current schedules. Reply as "
           'JSON: {"sql": "...", "explanation": "..."} or '
           '{"sql": null, "decline": "reason"}.')
 STATE_KEYS = ["question", "history", "schema", "attempt", "query", "error",

@@ -1,0 +1,104 @@
+{
+  "answer": "5 row(s)\nbdc | prior_fv | current_fv | pct_decline\nHANCOCK PARK CORPORATE INCOME, INC. | 29,768,535.00 | 19,858,407.00 | 33.29\nONEX DIRECT LENDING BDC FUND | 395,375,030.00 | 287,774,870.00 | 27.21\nWTI FUND X, INC. | 398,113,300.00 | 324,437,972.00 | 18.51\nGOLDMAN SACHS PRIVATE MIDDLE MARKET CREDIT II LLC | 1,649,434,000.00 | 1,361,577,000.00 | 17.45\nBLACKROCK DIRECT LENDING CORP. | 210,055,893.00 | 191,027,674.00 | 9.059",
+  "category": "over_time",
+  "decline": null,
+  "error": null,
+  "explanation": "Calculates the total fair value for current and prior schedules per BDC, finds the percentage decline, and returns the top 5 BDCs with the largest percentage decline.",
+  "follows": null,
+  "id": "q09",
+  "model_calls": 1,
+  "question": "Which five BDCs had the largest percentage decline in total fair value between schedules?",
+  "result": {
+    "columns": [
+      "bdc",
+      "prior_fv",
+      "current_fv",
+      "pct_decline"
+    ],
+    "ms": 50.3,
+    "row_count": 5,
+    "rows": [
+      [
+        "HANCOCK PARK CORPORATE INCOME, INC.",
+        29768535.0,
+        19858407.0,
+        33.290613730235634
+      ],
+      [
+        "ONEX DIRECT LENDING BDC FUND",
+        395375030.0,
+        287774870.0,
+        27.21470802038257
+      ],
+      [
+        "WTI FUND X, INC.",
+        398113300.0,
+        324437972.0,
+        18.50612074502409
+      ],
+      [
+        "GOLDMAN SACHS PRIVATE MIDDLE MARKET CREDIT II LLC",
+        1649434000.0,
+        1361577000.0,
+        17.451865306523327
+      ],
+      [
+        "BLACKROCK DIRECT LENDING CORP.",
+        210055893.0,
+        191027674.0,
+        9.058645643424057
+      ]
+    ],
+    "sql": "WITH schedule_totals AS (SELECT t1.name AS bdc, t2.period_role, SUM(t2.fair_value) AS total_fv FROM filings AS t1 JOIN holdings AS t2 ON t1.adsh = t2.adsh GROUP BY t1.name, t2.period_role), current_prior AS (SELECT bdc, MAX(CASE WHEN period_role = 'current' THEN total_fv END) AS current_fv, MAX(CASE WHEN period_role = 'prior' THEN total_fv END) AS prior_fv FROM schedule_totals GROUP BY bdc HAVING current_fv IS NOT NULL AND prior_fv IS NOT NULL AND prior_fv > 0) SELECT bdc, prior_fv, current_fv, (prior_fv - current_fv) * 100.0 / prior_fv AS pct_decline FROM current_prior ORDER BY pct_decline DESC LIMIT 5",
+    "truncated": false
+  },
+  "sql": "WITH schedule_totals AS (SELECT t1.name AS bdc, t2.period_role, SUM(t2.fair_value) AS total_fv FROM filings AS t1 JOIN holdings AS t2 ON t1.adsh = t2.adsh GROUP BY t1.name, t2.period_role), current_prior AS (SELECT bdc, MAX(CASE WHEN period_role = 'current' THEN total_fv END) AS current_fv, MAX(CASE WHEN period_role = 'prior' THEN total_fv END) AS prior_fv FROM schedule_totals GROUP BY bdc HAVING current_fv IS NOT NULL AND prior_fv IS NOT NULL AND prior_fv > 0) SELECT bdc, prior_fv, current_fv, (prior_fv - current_fv) * 100.0 / prior_fv AS pct_decline FROM current_prior ORDER BY pct_decline DESC LIMIT 5",
+  "stop": null,
+  "thread": "q09",
+  "tokens": 1041,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q09",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "52d3d9a7bd9fad72bc0466ed4cd76b719e246b623f1bed27c1ea7b9604d78e2a",
+      "run_id": "q09",
+      "sql_hash": "fc4a63c3aec8",
+      "step": 2,
+      "tokens_in": 793,
+      "tokens_out": 248,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.0008579
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q09",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "45677585a855",
+      "rows": 5,
+      "run_id": "q09",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q09",
+      "step": 5,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.0008579
+}

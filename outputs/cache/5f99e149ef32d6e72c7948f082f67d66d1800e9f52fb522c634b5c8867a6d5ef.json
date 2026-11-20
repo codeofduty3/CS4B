@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT COUNT(*) AS current_holdings, ROUND(SUM(fair_value), 2) AS total_fair_value FROM holdings_v", "tokens_in": 638, "tokens_out": 56, "usd": 0.0006885}

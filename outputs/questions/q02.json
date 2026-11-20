@@ -1,0 +1,84 @@
+{
+  "answer": "1 row(s)\nadsh | bdc | identifier | fair_value | principal | fair_value_pct_of_principal\n0001193125-26-344908 | COMMONWEALTH CREDIT PARTNERS BDC I, INC. | Membership Interest Investments, Preferred Membership Interest, EEP-EPS Fund I-A, LP - Series A-1 Preferred Units, Media & Entertainment | 53,000.00 | 887,237,000.00 | 0.005974",
+  "category": "lookup",
+  "decline": null,
+  "error": null,
+  "explanation": "To find the current debt holding with the lowest positive fair value as a percentage of principal, we query holdings_v where is_debt = 1, fair_value > 0, and principal > 0, calculating the percentage as 100 * fair_value / principal, ordering ascending, and taking the top result.",
+  "follows": null,
+  "id": "q02",
+  "model_calls": 1,
+  "question": "Which current debt holding has the lowest positive fair value as a percentage of principal?",
+  "result": {
+    "columns": [
+      "adsh",
+      "bdc",
+      "identifier",
+      "fair_value",
+      "principal",
+      "fair_value_pct_of_principal"
+    ],
+    "ms": 14.4,
+    "row_count": 1,
+    "rows": [
+      [
+        "0001193125-26-344908",
+        "COMMONWEALTH CREDIT PARTNERS BDC I, INC.",
+        "Membership Interest Investments, Preferred Membership Interest, EEP-EPS Fund I-A, LP - Series A-1 Preferred Units, Media & Entertainment",
+        53000.0,
+        887237000.0,
+        0.005973601191113536
+      ]
+    ],
+    "sql": "SELECT adsh, bdc, identifier, fair_value, principal, (100.0 * fair_value / principal) AS fair_value_pct_of_principal FROM holdings_v WHERE is_debt = 1 AND fair_value > 0 AND principal > 0 ORDER BY fair_value_pct_of_principal ASC LIMIT 1",
+    "truncated": false
+  },
+  "sql": "SELECT adsh, bdc, identifier, fair_value, principal, (100.0 * fair_value / principal) AS fair_value_pct_of_principal FROM holdings_v WHERE is_debt = 1 AND fair_value > 0 AND principal > 0 ORDER BY fair_value_pct_of_principal ASC LIMIT 1",
+  "stop": null,
+  "thread": "q02",
+  "tokens": 953,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q02",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "54aeaca10669e4a49a0f28f7b01fb05f89bbec600221988a24baf3fe583c64a3",
+      "run_id": "q02",
+      "sql_hash": "a0d469e8cbe9",
+      "step": 2,
+      "tokens_in": 793,
+      "tokens_out": 160,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.0006379
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q02",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "160b372af1f4",
+      "rows": 1,
+      "run_id": "q02",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q02",
+      "step": 5,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.0006379
+}

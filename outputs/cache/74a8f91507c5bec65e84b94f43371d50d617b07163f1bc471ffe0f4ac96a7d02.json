@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT bdc, identifier, investment_type, fair_value FROM holdings_v WHERE bdc = 'STELLUS CAPITAL INVESTMENT CORP' ORDER BY fair_value DESC, identifier LIMIT 1", "tokens_in": 637, "tokens_out": 70, "usd": 0.00074025}

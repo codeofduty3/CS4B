@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT holding_class, COUNT(*) AS holdings, SUM(fair_value) AS fair_value FROM holdings_v GROUP BY holding_class", "tokens_in": 631, "tokens_out": 59, "usd": 0.0006945}

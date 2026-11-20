@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT bdc, identifier, ROUND(price, 2) AS price, fair_value, principal FROM holdings_v WHERE is_debt = 1 AND price IS NOT NULL AND fair_value > 0 ORDER BY price ASC, identifier LIMIT 1", "tokens_in": 636, "tokens_out": 77, "usd": 0.00076575}

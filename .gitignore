@@ -3,6 +3,8 @@
 /LANTERN_Tool_Tutorial_Part4B.pdf
 /README.md
 .venv/
+.vercel/
+.env*.local
 __pycache__/
 *.pyc
 .ipynb_checkpoints/

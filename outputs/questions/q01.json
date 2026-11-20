@@ -1,0 +1,88 @@
+{
+  "answer": "1 row(s)\nadsh | bdc | identifier | investment_type | fair_value | cost | principal | maturity\n0001104659-26-093435 | STELLUS CAPITAL INVESTMENT CORP | Ad.Net Acquisition, LLC, Term Loan (SBIC II) |  | 16,524,257.00 | 16,669,315.00 | 16,691,168.00 | 2028-05-07",
+  "category": "lookup",
+  "decline": null,
+  "error": null,
+  "explanation": "Finds the holding with the highest fair value for STELLUS CAPITAL INVESTMENT CORP using the holdings_v view.",
+  "follows": null,
+  "id": "q01",
+  "model_calls": 1,
+  "question": "What is the largest current holding by fair value in STELLUS CAPITAL INVESTMENT CORP's schedule?",
+  "result": {
+    "columns": [
+      "adsh",
+      "bdc",
+      "identifier",
+      "investment_type",
+      "fair_value",
+      "cost",
+      "principal",
+      "maturity"
+    ],
+    "ms": 14.7,
+    "row_count": 1,
+    "rows": [
+      [
+        "0001104659-26-093435",
+        "STELLUS CAPITAL INVESTMENT CORP",
+        "Ad.Net Acquisition, LLC, Term Loan (SBIC II)",
+        null,
+        16524257.0,
+        16669315.0,
+        16691168.0,
+        "2028-05-07"
+      ]
+    ],
+    "sql": "SELECT adsh, bdc, identifier, investment_type, fair_value, cost, principal, maturity FROM holdings_v WHERE bdc = 'STELLUS CAPITAL INVESTMENT CORP' ORDER BY fair_value DESC LIMIT 1",
+    "truncated": false
+  },
+  "sql": "SELECT adsh, bdc, identifier, investment_type, fair_value, cost, principal, maturity FROM holdings_v WHERE bdc = 'STELLUS CAPITAL INVESTMENT CORP' ORDER BY fair_value DESC LIMIT 1",
+  "stop": null,
+  "thread": "q01",
+  "tokens": 891,
+  "trace": [
+    {
+      "node": "load_schema",
+      "run_id": "q01",
+      "schema_hash": "73b90a7a2750",
+      "step": 1,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "attempt": 0,
+      "node": "generate",
+      "request_key": "520c9c198b1db7806197544b1918c1024b18e2a99ebed7dcfa643e723c587dc9",
+      "run_id": "q01",
+      "sql_hash": "d7e3c94fc930",
+      "step": 2,
+      "tokens_in": 797,
+      "tokens_out": 94,
+      "ts": "2026-11-16T09:00:00-05:00",
+      "usd": 0.0004741
+    },
+    {
+      "node": "check",
+      "outcome": "ok",
+      "run_id": "q01",
+      "step": 3,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "execute",
+      "outcome": "ok",
+      "result_hash": "fff9dbc0e86e",
+      "rows": 1,
+      "run_id": "q01",
+      "step": 4,
+      "ts": "2026-11-16T09:00:00-05:00"
+    },
+    {
+      "node": "summarize",
+      "run_id": "q01",
+      "step": 5,
+      "stop": null,
+      "ts": "2026-11-16T09:00:00-05:00"
+    }
+  ],
+  "usd": 0.0004741
+}

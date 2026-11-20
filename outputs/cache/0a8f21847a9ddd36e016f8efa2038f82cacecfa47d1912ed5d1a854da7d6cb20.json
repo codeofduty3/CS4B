@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Count the number of holdings and sum their fair values across all current schedules using the holdings_v table.", "sql": "SELECT count(*) AS number_of_holdings, sum(fair_value) AS combined_fair_value FROM holdings_v", "tokens_in": 795, "tokens_out": 64, "usd": 0.0003985}

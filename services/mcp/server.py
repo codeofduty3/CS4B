@@ -7,6 +7,8 @@ ledger event for every call and every refusal.
     mcp dev services/mcp/server.py      # the Inspector
 
 ASKPANEL_DB overrides the database path so tests run on a scratch database.
+On a clean deployment checkout the ignored SQLite file is built automatically
+from the committed panel and view before the read-only connection opens.
 """
 import os
 import sys
@@ -19,7 +21,7 @@ from pydantic import BaseModel
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from askpanel import audit, clock, gate, tools  # noqa: E402
+from askpanel import audit, clock, db, gate, tools  # noqa: E402
 
 # The closed catalog. A literal, read by the self-check: adding a tool here
 # (or a @mcp.tool not listed here) fails catalog conformance.
@@ -37,6 +39,21 @@ MAX_ROWS = int(_P["server"]["max_rows"])
 TIMEOUT_S = float(_P["server"]["timeout_s"])
 
 LEDGER = audit.Ledger(clock=clock.clock)
+
+
+def _ensure_db():
+    """Build the ignored SQLite file when a deployment starts from a clean clone."""
+    if DB_PATH.exists():
+        return
+    key = "real_panel" if _P["data"].get("use_real") else "panel"
+    panel_path = ROOT / _P["data"][key]
+    view_path = ROOT / _P["data"]["view_sql"]
+    panel = db.load_panel(panel_path)
+    view_sql = view_path.read_text(encoding="utf-8") if view_path.exists() else None
+    db.build_db(panel, DB_PATH, view_sql)
+
+
+_ensure_db()
 CON = gate.connect_ro(DB_PATH, tables=set(TABLES))
 
 mcp = MCPServer("askpanel-query")

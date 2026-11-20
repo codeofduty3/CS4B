@@ -1,0 +1,1 @@
+{"decline": null, "explanation": "Read-only SQL over the verified BDC panel.", "sql": "SELECT bdc, ROUND(SUM(fair_value), 2) AS total_fair_value FROM holdings_v GROUP BY bdc ORDER BY total_fair_value DESC, bdc LIMIT 5", "tokens_in": 628, "tokens_out": 64, "usd": 0.000711}
