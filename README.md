@@ -12,6 +12,7 @@ mode calls Gemini and requires `GEMINI_API_KEY`; keys are never committed.
 ## Live services
 
 - Streamlit app: <https://cs4b-ask-panel.streamlit.app>
+- Codelab: <https://cs4b-codelab.vercel.app>
 - Codelab source: [`docs/codelab.md`](docs/codelab.md)
 
 ## Setup (10 minutes)
